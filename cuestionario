@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeValet · Encuesta para Hoteles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ed;
+    --gold: #c8a96e;
+    --gold-light: #e8d5a8;
+    --gold-pale: #f5edd8;
+    --gray: #6b6560;
+    --border: rgba(200,169,110,0.25);
+    --radius: 2px;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–black);
+color: var(–white);
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 300;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 0;
+opacity: 0.4;
+}
+
+.container {
+max-width: 720px;
+margin: 0 auto;
+padding: 0 24px;
+position: relative;
+z-index: 1;
+}
+
+/* HEADER */
+.header {
+padding: 56px 0 0;
+text-align: center;
+}
+
+.logo {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 13px;
+font-weight: 400;
+letter-spacing: 0.35em;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 48px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+}
+
+.logo::before, .logo::after {
+content: ‘’;
+width: 32px;
+height: 1px;
+background: var(–gold);
+opacity: 0.5;
+}
+
+.hero-eyebrow {
+font-size: 11px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.7;
+margin-bottom: 20px;
+}
+
+.hero-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(36px, 6vw, 58px);
+font-weight: 300;
+line-height: 1.1;
+color: var(–white);
+margin-bottom: 12px;
+}
+
+.hero-title em {
+font-style: italic;
+color: var(–gold-light);
+}
+
+.hero-divider {
+width: 48px;
+height: 1px;
+background: var(–gold);
+margin: 28px auto;
+opacity: 0.6;
+}
+
+/* INTRO CARD */
+.intro-card {
+background: rgba(200,169,110,0.05);
+border: 1px solid var(–border);
+padding: 36px 40px;
+margin: 48px 0;
+position: relative;
+}
+
+.intro-card::before {
+content: ‘”’;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 120px;
+color: var(–gold);
+opacity: 0.12;
+position: absolute;
+top: -20px;
+left: 20px;
+line-height: 1;
+}
+
+.intro-stat {
+display: flex;
+gap: 32px;
+margin-bottom: 28px;
+flex-wrap: wrap;
+}
+
+.stat-item {
+flex: 1;
+min-width: 140px;
+}
+
+.stat-number {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 42px;
+font-weight: 300;
+color: var(–gold);
+line-height: 1;
+margin-bottom: 6px;
+}
+
+.stat-label {
+font-size: 12px;
+color: rgba(245,242,237,0.55);
+line-height: 1.4;
+letter-spacing: 0.03em;
+}
+
+.intro-text {
+font-size: 14.5px;
+line-height: 1.75;
+color: rgba(245,242,237,0.75);
+border-top: 1px solid var(–border);
+padding-top: 24px;
+}
+
+.intro-text strong {
+color: var(–white);
+font-weight: 500;
+}
+
+/* PROGRESS */
+.progress-bar-wrap {
+display: flex;
+align-items: center;
+gap: 16px;
+margin: 40px 0 32px;
+}
+
+.progress-bar {
+flex: 1;
+height: 2px;
+background: rgba(200,169,110,0.15);
+border-radius: 2px;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–gold), var(–gold-light));
+width: 0%;
+transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-label {
+font-size: 11px;
+color: var(–gold);
+letter-spacing: 0.12em;
+white-space: nowrap;
+opacity: 0.8;
+}
+
+/* SECTION */
+.section {
+margin-bottom: 48px;
+}
+
+.section-header {
+display: flex;
+align-items: baseline;
+gap: 16px;
+margin-bottom: 28px;
+}
+
+.section-number {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 48px;
+font-weight: 300;
+color: var(–gold);
+opacity: 0.3;
+line-height: 1;
+flex-shrink: 0;
+}
+
+.section-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 22px;
+font-weight: 400;
+color: var(–white);
+line-height: 1.3;
+}
+
+.section-subtitle {
+font-size: 12px;
+color: var(–gray);
+margin-top: 4px;
+letter-spacing: 0.05em;
+}
+
+/* QUESTION */
+.question {
+margin-bottom: 24px;
+animation: fadeUp 0.5s ease forwards;
+opacity: 0;
+transform: translateY(12px);
+}
+
+@keyframes fadeUp {
+to { opacity: 1; transform: translateY(0); }
+}
+
+.question-label {
+font-size: 13.5px;
+color: rgba(245,242,237,0.85);
+margin-bottom: 10px;
+line-height: 1.5;
+}
+
+.question-label span.req {
+color: var(–gold);
+margin-left: 3px;
+}
+
+/* INPUTS */
+input[type=“text”],
+input[type=“email”],
+input[type=“number”],
+select,
+textarea {
+width: 100%;
+background: rgba(245,242,237,0.04);
+border: 1px solid rgba(200,169,110,0.2);
+color: var(–white);
+font-family: ‘DM Sans’, sans-serif;
+font-size: 14px;
+font-weight: 300;
+padding: 13px 16px;
+border-radius: var(–radius);
+outline: none;
+transition: border-color 0.2s, background 0.2s;
+appearance: none;
+}
+
+input[type=“text”]:focus,
+input[type=“email”]:focus,
+input[type=“number”]:focus,
+select:focus,
+textarea:focus {
+border-color: var(–gold);
+background: rgba(200,169,110,0.07);
+}
+
+input::placeholder, textarea::placeholder {
+color: rgba(245,242,237,0.2);
+}
+
+select {
+cursor: pointer;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’ viewBox=‘0 0 12 8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%23c8a96e’ stroke-width=‘1.5’ fill=‘none’ stroke-linecap=‘round’/%3E%3C/svg%3E”);
+background-repeat: no-repeat;
+background-position: right 14px center;
+padding-right: 38px;
+}
+
+select option {
+background: #1a1a1a;
+color: var(–white);
+}
+
+textarea {
+resize: vertical;
+min-height: 90px;
+}
+
+/* GRID INPUTS */
+.input-grid-2 {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+
+.input-grid-3 {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 10px;
+}
+
+@media (max-width: 540px) {
+.input-grid-2, .input-grid-3 { grid-template-columns: 1fr; }
+}
+
+.input-group label {
+font-size: 11px;
+color: var(–gray);
+letter-spacing: 0.08em;
+text-transform: uppercase;
+display: block;
+margin-bottom: 6px;
+}
+
+/* RADIO / CHECKBOX */
+.options-list {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.option-item {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+padding: 12px 16px;
+border: 1px solid rgba(200,169,110,0.15);
+cursor: pointer;
+transition: all 0.2s;
+position: relative;
+}
+
+.option-item:hover {
+border-color: rgba(200,169,110,0.4);
+background: rgba(200,169,110,0.05);
+}
+
+.option-item input[type=“radio”],
+.option-item input[type=“checkbox”] {
+width: 16px;
+height: 16px;
+min-width: 16px;
+appearance: none;
+border: 1px solid rgba(200,169,110,0.4);
+border-radius: 50%;
+margin-top: 2px;
+cursor: pointer;
+transition: all 0.2s;
+background: transparent;
+padding: 0;
+}
+
+.option-item input[type=“checkbox”] {
+border-radius: 0;
+}
+
+.option-item input[type=“radio”]:checked,
+.option-item input[type=“checkbox”]:checked {
+background: var(–gold);
+border-color: var(–gold);
+box-shadow: inset 0 0 0 3px var(–black);
+}
+
+.option-item:has(input:checked) {
+border-color: var(–gold);
+background: rgba(200,169,110,0.08);
+}
+
+.option-text {
+font-size: 13.5px;
+color: rgba(245,242,237,0.8);
+line-height: 1.4;
+}
+
+/* SCALE */
+.scale-wrap {
+display: flex;
+gap: 8px;
+align-items: center;
+}
+
+.scale-labels {
+display: flex;
+justify-content: space-between;
+margin-top: 8px;
+}
+
+.scale-label-text {
+font-size: 11px;
+color: var(–gray);
+letter-spacing: 0.04em;
+}
+
+.scale-btn {
+flex: 1;
+aspect-ratio: 1;
+max-width: 52px;
+background: transparent;
+border: 1px solid rgba(200,169,110,0.2);
+color: rgba(245,242,237,0.5);
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 18px;
+cursor: pointer;
+transition: all 0.2s;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.scale-btn:hover {
+border-color: var(–gold);
+color: var(–gold);
+}
+
+.scale-btn.active {
+background: var(–gold);
+border-color: var(–gold);
+color: var(–black);
+}
+
+/* DIVIDER */
+.section-divider {
+width: 100%;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–border), transparent);
+margin: 48px 0;
+}
+
+/* SUBMIT */
+.submit-section {
+text-align: center;
+padding: 48px 0 80px;
+}
+
+.submit-note {
+font-size: 12px;
+color: var(–gray);
+margin-bottom: 28px;
+line-height: 1.6;
+}
+
+.btn-submit {
+background: var(–gold);
+color: var(–black);
+border: none;
+padding: 16px 48px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 13px;
+font-weight: 500;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+cursor: pointer;
+transition: all 0.25s;
+position: relative;
+overflow: hidden;
+}
+
+.btn-submit::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: white;
+opacity: 0;
+transition: opacity 0.2s;
+}
+
+.btn-submit:hover::before { opacity: 0.12; }
+.btn-submit:active { transform: scale(0.98); }
+
+.btn-submit:disabled {
+opacity: 0.4;
+cursor: not-allowed;
+}
+
+/* SUCCESS */
+.success-state {
+display: none;
+text-align: center;
+padding: 80px 0;
+}
+
+.success-state.visible { display: block; }
+
+.success-icon {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 72px;
+color: var(–gold);
+margin-bottom: 24px;
+opacity: 0;
+animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.success-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 36px;
+font-weight: 300;
+margin-bottom: 16px;
+opacity: 0;
+animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.success-text {
+font-size: 14px;
+color: var(–gray);
+line-height: 1.7;
+max-width: 400px;
+margin: 0 auto;
+opacity: 0;
+animation: fadeUp 0.8s 0.6s forwards;
+}
+
+/* FOOTER */
+.footer {
+border-top: 1px solid var(–border);
+padding: 24px 0;
+text-align: center;
+font-size: 11px;
+color: rgba(107,101,96,0.6);
+letter-spacing: 0.08em;
+}
+
+.footer a {
+color: var(–gold);
+text-decoration: none;
+opacity: 0.7;
+}
+
+/* ANIMS */
+.section { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.4,0,0.2,1); }
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.question:nth-child(1) { animation-delay: 0.05s; }
+.question:nth-child(2) { animation-delay: 0.1s; }
+.question:nth-child(3) { animation-delay: 0.15s; }
+.question:nth-child(4) { animation-delay: 0.2s; }
+.question:nth-child(5) { animation-delay: 0.25s; }
+
+/* Highlight tag */
+.highlight-tag {
+display: inline-block;
+background: rgba(200,169,110,0.1);
+border: 1px solid rgba(200,169,110,0.3);
+color: var(–gold-light);
+font-size: 11px;
+letter-spacing: 0.08em;
+padding: 3px 10px;
+margin-left: 8px;
+vertical-align: middle;
+}
+
+.required-note {
+font-size: 11px;
+color: var(–gray);
+text-align: right;
+margin-bottom: 12px;
+}
+
+.required-note span { color: var(–gold); }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+
+  <header class="header">
+    <div class="logo">WeValet</div>
+    <p class="hero-eyebrow">Estudio de mercado · Castelldefels 2025</p>
+    <h1 class="hero-title">La experiencia del huésped<br><em>es el nuevo diferencial</em></h1>
+    <div class="hero-divider"></div>
+  </header>
+
+  <!-- INTRO CARD -->
+
+  <div class="intro-card">
+    <div class="intro-stat">
+      <div class="stat-item">
+        <div class="stat-number">81%</div>
+        <div class="stat-label">de los huéspedes valoran la experiencia por encima del precio al elegir un hotel</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">+23%</div>
+        <div class="stat-label">de incremento en valoraciones positivas cuando la llegada y salida son fluidas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4x</div>
+        <div class="stat-label">más probable que un huésped repita si el check-in supera sus expectativas</div>
+      </div>
+    </div>
+    <div class="intro-text">
+      El primer y último contacto del huésped con tu hotel — el check-in y el check-out — son los momentos que más condicionan su valoración final. <strong>Un servicio de valet profesional en estos momentos no es un lujo: es una palanca de rentabilidad.</strong> Mejora la percepción de valor, incrementa las reseñas positivas y puede generar ingresos adicionales sin coste fijo para el hotel.<br><br>
+      En WeValet estamos diseñando este servicio específicamente para hoteles de Castelldefels, y queremos hacerlo contigo. Esta encuesta te lleva <strong>menos de 5 minutos</strong> y te posiciona como hotel fundador del proyecto.
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 8</div>
+  </div>
+
+  <p class="required-note">Los campos marcados con <span>*</span> son obligatorios</p>
+
+  <!-- FORM -->
+
+  <form id="surveyForm" novalidate>
+
+```
+<!-- BLOQUE 0: IDENTIFICACIÓN -->
+<div class="section" id="s0">
+  <div class="section-header">
+    <div class="section-number">·</div>
+    <div>
+      <div class="section-title">Antes de empezar</div>
+      <div class="section-subtitle">Datos básicos de contacto</div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">Nombre del hotel <span class="req">*</span></div>
+    <input type="text" name="hotel_name" placeholder="Ej: Hotel Mar i Cel" required>
+  </div>
+
+  <div class="input-grid-2">
+    <div class="question">
+      <div class="question-label">Tu nombre <span class="req">*</span></div>
+      <input type="text" name="contact_name" placeholder="Nombre y apellido" required>
+    </div>
+    <div class="question">
+      <div class="question-label">Tu cargo</div>
+      <input type="text" name="contact_role" placeholder="Ej: Director de operaciones">
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">Email de contacto <span class="req">*</span></div>
+    <input type="email" name="contact_email" placeholder="tu@hotel.com" required>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- BLOQUE 1: PERFIL DEL HOTEL -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div>
+      <div class="section-title">Perfil del hotel y parking</div>
+      <div class="section-subtitle">Capacidad, categoría y operativa actual</div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Cuántas habitaciones tiene el hotel? <span class="req">*</span></div>
+    <div class="input-grid-3">
+      <div class="input-group">
+        <label>Habitaciones</label>
+        <input type="number" name="rooms" placeholder="Ej: 120" min="1">
+      </div>
+      <div class="input-group">
+        <label>Plazas de parking</label>
+        <input type="number" name="parking_spots" placeholder="Ej: 80" min="0">
+      </div>
+      <div class="input-group">
+        <label>Categoría</label>
+        <select name="stars">
+          <option value="" disabled selected>Estrellas</option>
+          <option value="3">3 estrellas</option>
+          <option value="4">4 estrellas</option>
+          <option value="5">5 estrellas</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿En qué franja horaria concentráis el mayor volumen de check-in? <span class="req">*</span><br><span style="font-size:11px;color:var(--gray)">Selecciona todas las que apliquen</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="checkbox" name="checkin_hours" value="10-13">
+        <span class="option-text">10:00 – 13:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkin_hours" value="13-16">
+        <span class="option-text">13:00 – 16:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkin_hours" value="16-19">
+        <span class="option-text">16:00 – 19:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkin_hours" value="19-22">
+        <span class="option-text">19:00 – 22:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkin_hours" value="distribuido">
+        <span class="option-text">Distribuido a lo largo del día sin pico claro</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Y para el check-out? <span class="req">*</span><br><span style="font-size:11px;color:var(--gray)">Selecciona todas las que apliquen</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="checkbox" name="checkout_hours" value="8-10">
+        <span class="option-text">08:00 – 10:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkout_hours" value="10-12">
+        <span class="option-text">10:00 – 12:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkout_hours" value="12-14">
+        <span class="option-text">12:00 – 14:00</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="checkout_hours" value="distribuido">
+        <span class="option-text">Distribuido sin pico claro</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Qué días concentran más movimiento de check-in/out? <span class="req">*</span><br><span style="font-size:11px;color:var(--gray)">Selecciona todas las que apliquen</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map(d => `
+      <label class="option-item" style="flex:0 0 auto;min-width:80px;">
+        <input type="checkbox" name="busy_days" value="${d}">
+        <span class="option-text">${d}</span>
+      </label>`).join('')}
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;" id="daysWrap"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- BLOQUE 2: PARKING HOY -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div>
+      <div class="section-title">Gestión actual del parking</div>
+      <div class="section-subtitle">Operativa, precio y puntos de fricción</div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Cuánto cobráis actualmente por el servicio de parking a los huéspedes? <span class="req">*</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="radio" name="parking_price" value="gratis">
+        <span class="option-text">Es gratuito para los huéspedes</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_price" value="<10">
+        <span class="option-text">Menos de 10 €/noche</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_price" value="10-20">
+        <span class="option-text">10 – 20 €/noche</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_price" value=">20">
+        <span class="option-text">Más de 20 €/noche</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_price" value="no_parking">
+        <span class="option-text">No tenemos parking propio</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Cómo gestionáis actualmente la apertura, entrada y salida del parking? <span class="req">*</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="radio" name="parking_mgmt" value="recepcion">
+        <span class="option-text">Recepción gestiona las llaves y accesos</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_mgmt" value="automatico">
+        <span class="option-text">Sistema automático (tarjeta, app, barrera)</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_mgmt" value="personal_dedicado">
+        <span class="option-text">Personal dedicado exclusivamente al parking</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_mgmt" value="huesped_solo">
+        <span class="option-text">El huésped aparca directamente sin asistencia</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="parking_mgmt" value="otro">
+        <span class="option-text">Otro</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Identificáis algún problema o fricción habitual en la gestión del parking o durante el check-in/out?</div>
+    <div class="options-list" style="margin-bottom:12px;">
+      <label class="option-item">
+        <input type="checkbox" name="pain_points" value="colapso_horas_punta">
+        <span class="option-text">Colapso o congestión en horas punta</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="pain_points" value="recepcion_sobrecargada">
+        <span class="option-text">Recepción sobrecargada con gestión de vehículos</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="pain_points" value="plazas_vacias">
+        <span class="option-text">Plazas vacías durante muchas horas del día</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="pain_points" value="quejas_huesped">
+        <span class="option-text">Quejas de huéspedes relacionadas con el parking</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="pain_points" value="sin_problemas">
+        <span class="option-text">No identificamos problemas relevantes</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question" id="pain_resolution_q" style="display:none;">
+    <div class="question-label">Si habéis identificado algún problema, ¿cómo lo resolvéis actualmente?</div>
+    <textarea name="pain_resolution" placeholder="Cuéntanos brevemente cómo lo gestionáis hoy…"></textarea>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- BLOQUE 3: SERVICIO Y APERTURA -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div>
+      <div class="section-title">Percepción de valor y apertura</div>
+      <div class="section-subtitle">Experiencia del huésped e interés en nuevos modelos</div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Ofrecéis actualmente algún servicio de valet o asistencia con vehículos para los huéspedes? <span class="req">*</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="radio" name="has_valet" value="si">
+        <span class="option-text">Sí, ya ofrecemos algún tipo de servicio</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="has_valet" value="no_pedido">
+        <span class="option-text">No, pero los huéspedes lo han pedido o mencionado</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="has_valet" value="no">
+        <span class="option-text">No, y no ha habido demanda aparente</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">Del 1 al 5, ¿qué importancia tiene para vosotros mejorar la experiencia en los momentos de llegada y salida del huésped? <span class="req">*</span></div>
+    <div class="scale-wrap" id="scaleImportance">
+      <button type="button" class="scale-btn" data-val="1" onclick="setScale('importance',1)">1</button>
+      <button type="button" class="scale-btn" data-val="2" onclick="setScale('importance',2)">2</button>
+      <button type="button" class="scale-btn" data-val="3" onclick="setScale('importance',3)">3</button>
+      <button type="button" class="scale-btn" data-val="4" onclick="setScale('importance',4)">4</button>
+      <button type="button" class="scale-btn" data-val="5" onclick="setScale('importance',5)">5</button>
+    </div>
+    <div class="scale-labels">
+      <span class="scale-label-text">Poca prioridad</span>
+      <span class="scale-label-text">Prioridad máxima</span>
+    </div>
+    <input type="hidden" name="importance_scale" id="importance_val">
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Estaríais abiertos a un modelo de servicio de valet por horas, a un precio competitivo, financiado parcialmente mediante la gestión de vuestras plazas libres? <span class="req">*</span><span class="highlight-tag">clave</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="radio" name="model_openness" value="muy_interesado">
+        <span class="option-text">Sí, nos interesa mucho explorar esto</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="model_openness" value="depende">
+        <span class="option-text">Depende de los detalles del modelo y el precio</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="model_openness" value="poco_interes">
+        <span class="option-text">Poca probabilidad por ahora</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="model_openness" value="no">
+        <span class="option-text">No encaja con nuestra operativa</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- BLOQUE 4: TIMING Y CTA -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div>
+      <div class="section-title">Timing y diferenciación</div>
+      <div class="section-subtitle">Contexto para una propuesta a medida</div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Tenéis algún evento, temporada o renovación próxima donde este servicio encajaría especialmente?</div>
+    <div class="options-list" style="margin-bottom:12px;">
+      <label class="option-item">
+        <input type="checkbox" name="timing" value="temporada_alta">
+        <span class="option-text">Temporada alta de verano (junio–septiembre)</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="timing" value="evento">
+        <span class="option-text">Evento o congreso ya planificado</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="timing" value="renovacion">
+        <span class="option-text">Renovación o remodelación próxima</span>
+      </label>
+      <label class="option-item">
+        <input type="checkbox" name="timing" value="sin_timing">
+        <span class="option-text">No hay un momento concreto en mente</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">WeValet arrancará con un número limitado de hoteles fundadores en Castelldefels — los primeros en ofrecer este servicio en el municipio. ¿Os gustaría recibir una propuesta personalizada sin compromiso? <span class="req">*</span><span class="highlight-tag">fundador</span></div>
+    <div class="options-list">
+      <label class="option-item">
+        <input type="radio" name="wants_proposal" value="si">
+        <span class="option-text">Sí, quiero recibir la propuesta</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="wants_proposal" value="info_primero">
+        <span class="option-text">Primero me gustaría más información general</span>
+      </label>
+      <label class="option-item">
+        <input type="radio" name="wants_proposal" value="no">
+        <span class="option-text">Por ahora no, pero mantened el contacto</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="question-label">¿Algún comentario adicional o algo que debamos saber sobre vuestra situación?</div>
+    <textarea name="comments" placeholder="Espacio libre para cualquier cosa que quieras compartir…"></textarea>
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="submit-section">
+  <p class="submit-note">Tus respuestas son confidenciales y se usarán exclusivamente para diseñar<br>el servicio WeValet. En ningún caso se compartirán con terceros.</p>
+  <button type="submit" class="btn-submit" id="submitBtn">Enviar encuesta →</button>
+</div>
+```
+
+  </form>
+
+  <!-- SUCCESS -->
+
+  <div class="success-state" id="successState">
+    <div class="success-icon">✦</div>
+    <h2 class="success-title">Gracias por tu tiempo</h2>
+    <p class="success-text">Hemos recibido tus respuestas. El equipo de WeValet se pondrá en contacto contigo en las próximas 48 horas con información personalizada para tu hotel.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  <div class="container">
+    WeValet · Castelldefels · <a href="mailto:hola@wevalet.es">hola@wevalet.es</a>
+  </div>
+</footer>
+
+<script>
+  // Days checkboxes dynamic render
+  const days = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  const daysWrap = document.getElementById('daysWrap');
+  days.forEach(d => {
+    const label = document.createElement('label');
+    label.className = 'option-item';
+    label.style.cssText = 'flex:0 0 auto;min-width:80px;';
+    label.innerHTML = `<input type="checkbox" name="busy_days" value="${d}"><span class="option-text">${d}</span>`;
+    daysWrap.appendChild(label);
+  });
+
+  // Scale function
+  const scaleValues = {};
+  function setScale(name, val) {
+    scaleValues[name] = val;
+    document.getElementById(name + '_val').value = val;
+    document.querySelectorAll(`#scale${name.charAt(0).toUpperCase()+name.slice(1)} .scale-btn`).forEach(btn => {
+      btn.classList.toggle('active', parseInt(btn.dataset.val) <= val);
+    });
+    updateProgress();
+  }
+
+  // Show resolution textarea if pain points selected (not "sin_problemas")
+  document.querySelectorAll('input[name="pain_points"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const anyPain = [...document.querySelectorAll('input[name="pain_points"]:checked')]
+        .some(el => el.value !== 'sin_problemas');
+      document.getElementById('pain_resolution_q').style.display = anyPain ? 'block' : 'none';
+      updateProgress();
+    });
+  });
+
+  // Progress tracking
+  const requiredFields = ['hotel_name','contact_name','contact_email','parking_price','parking_mgmt','has_valet','model_openness','wants_proposal'];
+  
+  function updateProgress() {
+    let filled = 0;
+    requiredFields.forEach(name => {
+      const inputs = document.querySelectorAll(`[name="${name}"]`);
+      if (inputs.length === 0) return;
+      if (inputs[0].type === 'radio') {
+        if ([...inputs].some(i => i.checked)) filled++;
+      } else if (inputs[0].value.trim()) {
+        filled++;
+      }
+    });
+    // count scale
+    if (scaleValues['importance']) filled++;
+    const total = requiredFields.length + 1;
+    const pct = Math.round((filled / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${filled} / ${total}`;
+  }
+
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('change', updateProgress);
+    el.addEventListener('input', updateProgress);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  // Submit
+  document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Basic validation
+    const required = ['hotel_name','contact_name','contact_email'];
+    let valid = true;
+    required.forEach(name => {
+      const el = document.querySelector(`[name="${name}"]`);
+      if (!el || !el.value.trim()) { el && (el.style.borderColor = 'rgba(200,100,100,0.6)'); valid = false; }
+    });
+    
+    if (!document.querySelector('input[name="parking_price"]:checked')) valid = false;
+    if (!document.querySelector('input[name="model_openness"]:checked')) valid = false;
+    if (!document.querySelector('input[name="wants_proposal"]:checked')) valid = false;
+
+    if (!valid) {
+      alert('Por favor, completa los campos obligatorios antes de enviar.');
+      return;
+    }
+
+    // Collect data
+    const data = new FormData(this);
+    const payload = {};
+    for (let [k, v] of data.entries()) {
+      if (payload[k]) {
+        payload[k] = Array.isArray(payload[k]) ? [...payload[k], v] : [payload[k], v];
+      } else {
+        payload[k] = v;
+      }
+    }
+    payload['importance_scale'] = scaleValues['importance'] || null;
+    payload['submitted_at'] = new Date().toISOString();
+
+    console.log('WeValet Survey Response:', JSON.stringify(payload, null, 2));
+
+    // Show success
+    document.getElementById('surveyForm').style.display = 'none';
+    document.getElementById('successState').classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
